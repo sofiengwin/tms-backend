@@ -1,0 +1,3 @@
+class Driver < User
+  
+end
