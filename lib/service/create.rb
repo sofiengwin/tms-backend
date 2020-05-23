@@ -5,8 +5,9 @@ module Service
         if valid?
           record = klass.create!(changeset)
           result.succeed(record)
+        else
+          result.fail(errors)
         end
-        result.fail(errors)
       end
     end
   end

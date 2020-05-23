@@ -14,4 +14,14 @@ class ActiveSupport::TestCase
   def assert_errors(expected, details)
     assert_equal expected, details.map { |h| h[:error] }
   end
+
+  def assert_json_data(expected)
+    with_response_data do |json|
+      assert_equal expected, json, response.body
+    end
+  end
+
+  def with_response_data
+    yield JSON.parse(response.body)['data']
+  end
 end
