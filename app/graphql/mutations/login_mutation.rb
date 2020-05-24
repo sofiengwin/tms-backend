@@ -1,14 +1,9 @@
 module Mutations
   class LoginMutation < BaseMutation
-    class AdminType < Types::BaseObject
-      field :name, String, null: false
-      field :email, String, null: false
-    end
-
     argument :email, String, required: true
     argument :password, String, required: true
 
-    field :admin, AdminType, null: true
+    field :admin, Types::AdminType, null: true
     field :hhh, String, null: true
     field :errors, [Types::ServiceErrorType], null: true
 

@@ -10,6 +10,12 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.library :active_record
+    end
+  end
+
   # Add more helper methods to be used by all tests here...
   def assert_errors(expected, details)
     assert_equal expected, details.map { |h| h[:error] }
@@ -23,5 +29,9 @@ class ActiveSupport::TestCase
 
   def with_response_data
     yield JSON.parse(response.body)['data']
+  end
+
+  def token_for_user(user_id)
+    ActionToken.encode(user_id, scope: 'login')
   end
 end

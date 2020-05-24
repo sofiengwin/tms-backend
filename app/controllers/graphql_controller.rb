@@ -5,12 +5,12 @@ class GraphqlController < ApplicationController
   # protect_from_forgery with: :null_session
 
   def execute
+    pp
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
     result = BackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -37,6 +37,24 @@ class GraphqlController < ApplicationController
     else
       raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
     end
+  end
+
+  def bearer_token
+    request.headers['Authorization']
+  end
+
+  def current_user_id
+    return unless bearer_token
+
+    claim = ActionToken.decode(bearer_token, scope: 'login')
+
+    claim['sub']
+  end
+
+  def current_user
+    return unless current_user_id
+
+    Admin.find_by_id(current_user_id)
   end
 
   def handle_error_in_development(e)
