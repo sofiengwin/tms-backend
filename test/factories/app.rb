@@ -8,4 +8,10 @@ FactoryBot.define do
     hometown { 'Amarata' }
     state { 'Bayelsa' }
   end
+
+  factory :admin do
+    name { "Charles Boyle" }
+    email { "charles@example.com" }
+    password { "test" }
+  end
 end

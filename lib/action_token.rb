@@ -4,7 +4,7 @@ module ActionToken
   ISSUER = 'bys.rvs.com'
   ALGORITHM = 'HS256'
 
-  SIGNING_KEY = Rails.application.secrets.secret_key_base
+  SIGNING_KEY = Rails.application.key_generator.generate_key('action-token')
 
   def self.encode(user_id, scope:, **claims)
     payload = claims.merge(
@@ -12,9 +12,10 @@ module ActionToken
       aud: ISSUER,
       sub: user_id,
       iat: Time.now.to_i,
-      exp: Time.now.to_i + 4 * 7 * 3600,
+      exp: Time.now.to_i + (4 * 7 * 3600),
       scope: scope,
     )
+
     JWT.encode(payload, SIGNING_KEY, ALGORITHM)
   end
 

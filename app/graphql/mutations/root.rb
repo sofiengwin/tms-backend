@@ -3,5 +3,6 @@ module Mutations
     graphql_name 'Mutations'
 
     field :createUser, mutation: CreateUserMutation
+    field :login, mutation: LoginMutation
   end
 end
