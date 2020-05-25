@@ -7,5 +7,7 @@ module Types
     field :areaOfOperation, String, null: false
     field :hometown, String, null: false
     field :state, String, null: false
+    
+    field :payments, [Types::PaymentType], null: true
   end
 end

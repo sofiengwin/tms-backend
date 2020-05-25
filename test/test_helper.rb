@@ -31,6 +31,10 @@ class ActiveSupport::TestCase
     yield JSON.parse(response.body)['data']
   end
 
+  def with_response_errors
+    yield JSON.parse(response.body)['errors']
+  end
+
   def token_for_user(user_id)
     ActionToken.encode(user_id, scope: 'login')
   end
