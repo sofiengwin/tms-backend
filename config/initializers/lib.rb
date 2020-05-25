@@ -1,3 +1,5 @@
 require 'service'
 require 'service_error'
 require 'action_token'
+require 'generate_qr_code'
+require 'upload_qr_code'
