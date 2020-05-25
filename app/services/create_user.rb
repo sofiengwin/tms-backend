@@ -21,9 +21,3 @@ class CreateUser < Service::Create
     super(Driver)
   end
 end
-
-=begin
-  add service helper classes
-  add prmoise.rb
-  add graphql rb
-=end
