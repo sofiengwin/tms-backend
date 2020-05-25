@@ -21,6 +21,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'promise.rb'
 gem 'graphql'
+gem 'graphiql-rails'
 gem 'jwt'
 gem 'rqrcode'
 gem 'aws-sdk-s3'
@@ -28,6 +29,7 @@ gem 'webmock'
 gem 'sentry-raven'
 gem 'pg'
 gem 'sidekiq'
+gem 'sprockets', '~> 3'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'

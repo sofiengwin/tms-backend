@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_05_25_140103) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -21,9 +24,9 @@ ActiveRecord::Schema.define(version: 2020_05_25_140103) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.integer "cashier_id"
+    t.bigint "cashier_id"
     t.integer "amount"
-    t.integer "driver_id"
+    t.bigint "driver_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cashier_id"], name: "index_payments_on_cashier_id"
