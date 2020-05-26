@@ -4,6 +4,6 @@ class UploadQrCode
   end
 
   private def bucket
-    AWS_S3.bucket('sofien-pizzas')
+    AWS_S3.bucket(ENV['QR_CODE_BUCKET'])
   end
 end

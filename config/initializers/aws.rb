@@ -1,8 +1,8 @@
 require 'aws-sdk-s3'
 
 AWS_CREDENTIALS = Aws::Credentials.new(
-  'AKIAJ46ODZE7A3NRYKHQ',
-  '7Mpo05UmSrmewAPyF9HITy8vWmEcY1mU4ZJAq/hc',
+  ENV['AWS_ACCESS_KEY'],
+  ENV['AWS_ACCESS_SECRET'],
 )
 
 AWS_S3 = Aws::S3::Resource.new(
