@@ -1,4 +1,4 @@
-SIDEKIQ_REDIS_URL = Rails.env.test? ? ENV['TEST_SIDEKIQ_REDIS_URL'] : ENV['SIDEKIQ_REDIS_URL']
+SIDEKIQ_REDIS_URL = Rails.env.test? ? ENV['TEST_SIDEKIQ_REDIS_URL'] : ENV['REDIS_URL']
 
 sidekiq_redis = { url: SIDEKIQ_REDIS_URL }
 
