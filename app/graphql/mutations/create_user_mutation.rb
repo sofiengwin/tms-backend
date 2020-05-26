@@ -12,6 +12,8 @@ module Mutations
     field :errors, [Types::ServiceErrorType], null: true
 
     def resolve(**inputs)
+      return { errors: [ServiceError.new(:admin, 'notAuthorized')] } unless context[:current_user]
+  
       result = CreateUser.perform(
         name: inputs[:name],
         phone_number: inputs[:phoneNumber],

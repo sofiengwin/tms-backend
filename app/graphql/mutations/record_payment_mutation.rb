@@ -16,6 +16,8 @@ module Mutations
     field :errors, [Types::ServiceErrorType], null: true
 
     def resolve(cashier:, driver:, amount:)
+      return { errors: [ServiceError.new(:admin, 'notAuthorized')] } unless context[:current_user]
+
       unless cashier || driver
         return { errors: [ServiceError.new(:driverOrCashier, 'blank')]}
       end
