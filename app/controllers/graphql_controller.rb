@@ -44,7 +44,7 @@ class GraphqlController < ApplicationController
   end
 
   def current_user_id
-    return unless bearer_token
+    return if bearer_token && bearer_token.empty?
 
     claim = ActionToken.decode(bearer_token, scope: 'login')
 
