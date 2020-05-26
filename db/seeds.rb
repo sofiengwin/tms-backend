@@ -52,3 +52,5 @@ states = [
     state: states.sample
   )
 end
+
+# Admin.create(name: 'Onisofien', email: 'oni@example.com', password: 'test')
