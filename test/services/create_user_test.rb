@@ -15,6 +15,7 @@ class CreateUserTest < ActiveSupport::TestCase
     
     assert result.succeeded?
     assert result.value
+    assert 1, UploadQrCodeJob.jobs.count
   end
 
   test 'failure' do
@@ -26,10 +27,10 @@ class CreateUserTest < ActiveSupport::TestCase
       area_of_operation: 'amarata',
       hometown: 'amarata',
       state: '',
-
     )
 
     assert result.failed?
     assert_errors [:blank], result.reason.details[:state]
+    assert 0, UploadQrCodeJob.jobs.count
   end
 end

@@ -8,5 +8,7 @@ class UploadQrCodeJobTest < ActiveSupport::TestCase
 
 
     UploadQrCodeJob.new.perform(driver.id)
+    
+    assert driver.reload.qr_code
   end
 end

@@ -19,5 +19,6 @@ class CreateUser < Service::Create
 
   def perform
     super(Driver)
+      .on_success { |d| UploadQrCodeJob.perform_async(d.id) }
   end
 end

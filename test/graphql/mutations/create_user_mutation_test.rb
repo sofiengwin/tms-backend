@@ -22,9 +22,10 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
   GQL
 
   test 'success' do
+
     post(
       graphql_path,
-      headers: {},
+      headers: { 'Authorization' => token_for_user(create(:admin).id)},
       params: {
         query: QUERY,
         variables: {
@@ -58,7 +59,7 @@ class CreateUserMutationTest < ActionDispatch::IntegrationTest
   test 'failure' do
     post(
       graphql_path,
-      headers: {},
+      headers: { 'Authorization' => token_for_user(create(:admin).id)},
       params: {
         query: QUERY,
         variables: {
