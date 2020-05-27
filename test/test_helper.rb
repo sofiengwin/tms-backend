@@ -29,6 +29,13 @@ class ActiveSupport::TestCase
     with_response_data do |json|
       assert_equal expected, json, response.body
     end
+
+  end
+
+  def assert_json_errors(expected)
+    with_response_errors do |json|
+      assert_equal expected, json, response.body
+    end
   end
 
   def with_response_data

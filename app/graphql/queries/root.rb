@@ -9,5 +9,6 @@ module Queries
     field :fetchPayment, resolver: FetchPaymentQuery
 
     field :fetchDefaulters, resolver: FetchDefaultersQuery
+    field :me, resolver: MeQuery
   end
 end
