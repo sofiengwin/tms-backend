@@ -7,6 +7,7 @@ module Types
     field :areaOfOperation, String, null: false
     field :hometown, String, null: false
     field :state, String, null: false
+    field :qrCode: String, null: true
     
     field :payments, [Types::PaymentType], null: true
   end
