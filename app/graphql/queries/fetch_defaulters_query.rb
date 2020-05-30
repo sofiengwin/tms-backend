@@ -4,7 +4,7 @@ module Queries
       field :monday, [Types::DriverType], null: true, hash_key: 'Monday'
       field :tuesday, [Types::DriverType], null: true, hash_key: 'Tuesday'
       field :wednesday, [Types::DriverType], null: true, hash_key: 'Wednesday'
-      field :thursday, [Types::DriverType], null: true, hash_key: 'THursday'
+      field :thursday, [Types::DriverType], null: true, hash_key: 'Thursday'
       field :friday, [Types::DriverType], null: true, hash_key: 'Friday'
     end
 
