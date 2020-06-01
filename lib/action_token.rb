@@ -32,9 +32,5 @@ module ActionToken
     claims, _header = *JWT.decode(str, SIGNING_KEY, true, expectations)
 
     claims
-  rescue JWT::ExpiredSignature
-    raise 'Expire Signature'
-  rescue JWT::InvalidAudError, JWT::InvalidIssuerError, JWT::DecodeError
-    raise 'Invalid token'
   end
 end

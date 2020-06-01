@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ListDriversQueryTest < ActionDispatch::IntegrationTest
+class MeQueryTest < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
     query me {
       me {

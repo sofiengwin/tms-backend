@@ -4,15 +4,15 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
 
+  before_action :current_user_id
+
   def execute
-    pp
-    variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
     context = {
       current_user: current_user,
     }
-    result = BackendSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    result = BackendSchema.execute(query, variables: @variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
     raise e unless Rails.env.development?
@@ -46,9 +46,15 @@ class GraphqlController < ApplicationController
   def current_user_id
     return if bearer_token && bearer_token.empty?
 
+    @variables = ensure_hash(params[:variables])
+    
+    return if @variables.has_key?('email') && @variables.has_key?('password')
+
     claim = ActionToken.decode(bearer_token, scope: 'login')
 
     claim['sub']
+  rescue JWT::InvalidAudError, JWT::InvalidIssuerError, JWT::DecodeError, JWT::ExpiredSignature
+    render status: 401, json: { message: 'User not authorised' }
   end
 
   def current_user
