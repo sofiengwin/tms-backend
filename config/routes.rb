@@ -3,6 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post "/graphql", to: "graphql#execute"
+  post "/login", to: "graphql#login"
 
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   # if Rails.env.development?

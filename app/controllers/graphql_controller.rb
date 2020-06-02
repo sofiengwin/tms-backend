@@ -19,12 +19,28 @@ class GraphqlController < ApplicationController
     handle_error_in_development e
   end
 
+  def login
+    pp @variables
+    admin = Admin.find_by_email(@variables['email'])
+
+    if admin && admin.authenticate(@variables['password'])        
+      render json: {
+        admin: {
+          id: admin.id,
+          email: admin.email,
+          name: admin.name,
+        },
+        hhh: ActionToken.encode(admin.id, scope: 'login')
+      }
+    else
+      { errors: [ServiceError.new(:emailOrPassword, 'invalid')]}
+    end
+  end
+
   private
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
-    pp @variables
-    pp params
     case ambiguous_param
     when String
       if ambiguous_param.present?
