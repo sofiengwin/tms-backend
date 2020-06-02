@@ -57,13 +57,14 @@ GQL
     admin = create(:admin)
 
     post(
-      login_path,
+      graphql_path,
       headers: { 'Authorization' => "#{token_for_user(admin.id)}.fake.not.working"},
       params: {
-        query: QUERY,
+        query: LOGIN,
         variables: {
           email: admin.email,
-          password: 'test'
+          password: 'test',
+          kdkd: 'djkkds'
         }.to_json
       }
     )

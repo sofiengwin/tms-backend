@@ -7,6 +7,10 @@ class GraphqlController < ApplicationController
   before_action :current_user_id
 
   def execute
+    pp 'variable'
+    pp @variables
+    pp 'type of variable'
+    pp @variables.class
     query = params[:query]
     operation_name = params[:operationName]
     context = {
@@ -20,7 +24,6 @@ class GraphqlController < ApplicationController
   end
 
   def login
-    pp @variables
     admin = Admin.find_by_email(@variables['email'])
 
     if admin && admin.authenticate(@variables['password'])        
