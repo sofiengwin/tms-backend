@@ -11,7 +11,7 @@ module Queries
       raise GraphQL::ExecutionError.new("Something went wrong", extensions: { "admin" => "notAuthorized" }) unless context[:current_user]
 
       result = PaymentStats.perform(cashier: cashier)
-      pp cashier
+
       result.value.merge(cashier: cashier)
     end
   end
