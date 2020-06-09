@@ -7,7 +7,7 @@ module Queries
     
     type Types::PaymentStatsType, null: true
 
-    def resolve(cashier:)
+    def resolve(cashier: nil)
       raise GraphQL::ExecutionError.new("Something went wrong", extensions: { "admin" => "notAuthorized" }) unless context[:current_user]
 
       result = PaymentStats.perform(cashier: cashier)
