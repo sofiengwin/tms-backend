@@ -18,6 +18,6 @@ class FetchDefaulters < Service::Base
   end
 
   private def defaulters(day)
-    Driver.joins(:payments).where('users.created_at < payments.created_at AND payments.created_at between ? and ?', day.beginning_of_day, day.end_of_day)
+    Driver.joins(:payments).where.not('users.created_at < payments.created_at AND payments.created_at between ? and ?', day.beginning_of_day, day.end_of_day)
   end
 end
