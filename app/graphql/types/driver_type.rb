@@ -1,5 +1,6 @@
 module Types
   class DriverType < Types::BaseObject
+    field :id, ID, null: false
     field :name, String, null: false
     field :phoneNumber, String, null: false
     field :motNumber, String, null: false
