@@ -8,7 +8,6 @@ class FetchPaymentStatsQueryTest < ActionDispatch::IntegrationTest
         monthlyTotal
         today
         dailyTotals {
-          date
           amount
         }
         cashier {
@@ -41,7 +40,7 @@ class FetchPaymentStatsQueryTest < ActionDispatch::IntegrationTest
         "yearlyTotal"=>4,
         "monthlyTotal"=>4,
         "today"=>2,
-        "dailyTotals"=>[{"date"=>"2020-06-09", "amount"=>2}, {"date"=>"2020-06-08", "amount"=>2}],
+        "dailyTotals"=>[{"amount"=>2}, {"amount"=>2}],
         "cashier"=>{"name"=>"Charles Boyle"}
       }
     )
@@ -70,7 +69,7 @@ class FetchPaymentStatsQueryTest < ActionDispatch::IntegrationTest
         "yearlyTotal"=>4,
         "monthlyTotal"=>4,
         "today"=>2,
-        "dailyTotals"=>[{"date"=>"2020-06-09", "amount"=>2}, {"date"=>"2020-06-08", "amount"=>2}],
+        "dailyTotals"=>[{"amount"=>2}, {"amount"=>2}],
         "cashier"=>nil
       }
     )
