@@ -14,6 +14,7 @@ class FetchDefaultersQueryTest < ActionDispatch::IntegrationTest
   test 'success' do
     admin = create(:admin)
     create(:payment, cashier: admin, driver: create(:driver, created_at: 3.days.ago, name: 'Boyle'), created_at: 2.day.ago)
+    create(:payment, cashier: admin, driver: create(:driver, created_at: 3.days.ago, name: 'Boyle'), created_at: 4.day.ago)
 
     post(
       graphql_path,
@@ -24,6 +25,8 @@ class FetchDefaultersQueryTest < ActionDispatch::IntegrationTest
         query: QUERY,
       }
     )
+
+    pp response.body
 
     assert_json_data(
       'fetchDefaulters' => {
