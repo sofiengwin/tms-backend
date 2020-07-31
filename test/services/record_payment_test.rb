@@ -13,6 +13,9 @@ class RecordPaymentTest < ActiveSupport::TestCase
 
     assert result.succeeded?
     assert result.value
+    assert result.value.driver
+    assert result.value.cashier
+    assert result.value.payment_type
   end
 
   test 'failure' do

@@ -10,7 +10,9 @@ module Mutations
       prepare: ->(id, _) { Driver.find_by_id(id) },
       as: :driver
 
-    argument :amount, Int, required: true
+    argument :amount, Int, required: false
+    argument :paymentType, String, required: false
+
 
     field :payment, Types::PaymentType, null: true
     field :errors, [Types::ServiceErrorType], null: true

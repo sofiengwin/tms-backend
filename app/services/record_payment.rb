@@ -2,13 +2,13 @@ class RecordPayment < Service::Create
   field :driver, presence: true
   field :cashier, presence: true
   field :amount, presence: true
-  field :type
+  field :payment_type
 
-  def initialize(driver:, cashier:, amount:, type: 'cash')
+  def initialize(driver:, cashier:, amount:, payment_type: 'Cash')
     @driver = driver
     @cashier = cashier
-    @amount = type == 'cash' ? amount : 0;
-    @type = type
+    @amount = payment_type == 'Cash' ? amount : 0;
+    @payment_type = payment_type
   end
 
   def perform
