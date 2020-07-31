@@ -10,5 +10,6 @@ class FetchDefaultersTest < ActiveSupport::TestCase
 
     result.succeeded?
     assert result.value
+    pp result.value
   end
 end

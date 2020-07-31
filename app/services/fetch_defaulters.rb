@@ -5,10 +5,10 @@ class FetchDefaulters < Service::Base
 
   def perform
     defaulters = {}
-    count = 1
+    count = 0
     while count <= 7
       day = (count + 1).days.ago
-      defaulters[day.strftime('%A')] = defaulters(day) if day.wday <= 5 && day.wday > 0
+      defaulters[day.strftime('%A')] = filter_no_payment(day: day) if day.wday <= 5 && day.wday > 0
       count += 1
     end
 
@@ -17,7 +17,12 @@ class FetchDefaulters < Service::Base
     end
   end
 
-  private def defaulters(day)
-    Driver.joins(:payments).where.not('users.created_at < payments.created_at AND payments.created_at between ? and ?', day.beginning_of_day, day.end_of_day)
+  private def filter_no_payment(day:)
+    Driver.where.not(id: days_payment(day: day))
+      .where('users.created_at < ? ', day.beginning_of_day)
+  end
+
+  private def days_payment(day:)
+    Payment.where('payments.created_at between ? and ?', day.beginning_of_day, day.end_of_day).map(&:driver_id)
   end
 end
