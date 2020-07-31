@@ -9,6 +9,7 @@ class RecordPaymentTest < ActiveSupport::TestCase
       driver: driver,
       cashier: cashier,
       amount: 200,
+      resolved_at:  "2020-7-31T18:28"
     )
 
     assert result.succeeded?
@@ -16,6 +17,7 @@ class RecordPaymentTest < ActiveSupport::TestCase
     assert result.value.driver
     assert result.value.cashier
     assert result.value.payment_type
+    assert result.value.resolved_at
   end
 
   test 'failure' do

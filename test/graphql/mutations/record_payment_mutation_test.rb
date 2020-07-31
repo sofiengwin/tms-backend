@@ -2,8 +2,8 @@ require 'test_helper'
 
 class RecordPaymentMutation < ActionDispatch::IntegrationTest
   QUERY = <<-GQL
-    mutation recordPayment($driverId: ID!, $cashierId: ID!, $amount: Int, $paymentType: String) {
-      recordPayment(input: {driverId: $driverId, cashierId: $cashierId, amount: $amount, paymentType: $paymentType}) {
+    mutation recordPayment($driverId: ID!, $cashierId: ID!, $amount: Int, $paymentType: String, $resolvedAt: String) {
+      recordPayment(input: {driverId: $driverId, cashierId: $cashierId, amount: $amount, paymentType: $paymentType, resolvedAt: $resolvedAt}) {
         payment {
           driver {
             name
@@ -36,6 +36,7 @@ class RecordPaymentMutation < ActionDispatch::IntegrationTest
           driverId: driver.id,
           cashierId: cashier.id,
           amount: 200,
+          resolvedAt:  "2020-7-31T18:28",
         }.to_json
       }
     )

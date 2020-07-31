@@ -12,12 +12,12 @@ module Mutations
 
     argument :amount, Int, required: false
     argument :paymentType, String, required: false
-
+    argument :resolvedAt, String, required: false
 
     field :payment, Types::PaymentType, null: true
     field :errors, [Types::ServiceErrorType], null: true
 
-    def resolve(cashier:, driver:, amount:)
+    def resolve(cashier:, driver:, amount:, paymentType: 'Cash', resolvedAt: Time.now)
       return { errors: [ServiceError.new(:admin, 'notAuthorized')] } unless context[:current_user]
 
       unless cashier || driver
@@ -28,6 +28,8 @@ module Mutations
         cashier: cashier,
         driver: driver,
         amount: amount,
+        payment_type: paymentType,
+        resolved_at: resolvedAt
       )
 
       if result.succeeded?
