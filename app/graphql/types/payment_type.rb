@@ -6,6 +6,10 @@ module Types
     field :createdAt, String, null: false
     field :paymentType, String, null: false
 
+    def payment_type
+      object.payment_type || 'Cash'
+    end
+
     def created_at
       object.created_at.strftime('%Y-%-m-%-dT%H:%M')
     end
