@@ -5,7 +5,9 @@ class FetchDefaultersQueryTest < ActionDispatch::IntegrationTest
     query fetchDefaulters {
       fetchDefaulters {
         monday {
-          name
+          driver {
+            name
+          }
         }
       }
     }
@@ -31,7 +33,8 @@ class FetchDefaultersQueryTest < ActionDispatch::IntegrationTest
     assert_json_data(
       'fetchDefaulters' => {
         'monday' => [
-          { 'name' => 'Boyle' }
+          {'driver' => { 'name' => 'Boyle' }},
+          {'driver' => { 'name' => 'Boyle' }},
         ]
       }
     )
